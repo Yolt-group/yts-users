@@ -1,0 +1,12 @@
+@startuml
+[Users] as users
+[Maintenance] as maintenance
+
+queue "users" as users_topic
+database "users" as users_keyspace
+users -[#red]-> users_keyspace
+
+users -[#blue]-> users_topic : publishes
+
+users -[#black]> maintenance: HTTP
+@enduml

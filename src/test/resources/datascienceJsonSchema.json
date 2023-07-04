@@ -1,0 +1,70 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "title": "User Data Message",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "delete": {
+      "type": "boolean"
+    },
+    "schema_version": {
+      "type": "integer"
+    },
+    "entity_id": {
+      "type": "string"
+    },
+    "payload": {
+      "$ref": "#/definitions/UserData"
+    }
+  },
+  "required": [
+    "delete",
+    "entity_id",
+    "payload",
+    "schema_version"
+  ],
+  "definitions": {
+    "UserData": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "clientId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "userId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "clientUserId": {
+          "type": "string",
+          "format": "uuid"
+        },
+        "blocked": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "blockedReason": {
+          "type": "string"
+        },
+        "created": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "oneOffAisUser": {
+          "type": "boolean"
+        },
+        "deleted": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "clientId",
+        "userId",
+        "created",
+        "oneOffAisUser"
+      ]
+    }
+  }
+}

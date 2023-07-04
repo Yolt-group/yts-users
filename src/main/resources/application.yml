@@ -1,0 +1,91 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /users
+  tomcat:
+    max-threads: 4
+logging:
+  level:
+    ROOT: INFO
+
+spring:
+  dao:
+    exceptiontranslation:
+      enabled: false # disable exception translation for Cassandra exception compatibility
+  main:
+    allow-bean-definition-overriding: true
+    banner-mode: "off"
+  cache:
+    cache-names: "features"
+    caffeine:
+      spec: "maximumSize=1,expireAfterWrite=1m"
+  kafka:
+    consumer:
+      group-id: users
+  datasource:
+    driverClassName: org.postgresql.Driver
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+         jdbc:
+           time_zone: UTC
+  flyway:
+    baseline-on-migrate: true
+
+info:
+  appName: users
+  appVersion: 1
+
+service:
+  site-management:
+    url: https://site-management
+  maintenance:
+    url: https://maintenance/maintenance
+  client-users:
+    url: https://client-users/client-users
+
+yolt:
+  commons:
+    kafka:
+      enabled: true
+    error-handling:
+      prefix: US
+  kafka:
+    consumer-group: users
+    producing:
+      enabled: true
+  vault:
+    enabled: true
+    secret:
+      enabled: true
+  client-token:
+    verification:
+      enabled: true
+
+springdoc:
+  override-with-generic-response: false
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: info, health, metrics, prometheus
+      base-path: /actuator
+  server:
+    port: 8444
+    ssl:
+      enabled: true
+      key-store: /vault/secrets/keystore.p12
+      key-alias: keystore
+      key-store-password: dontchangeit
+  endpoint:
+    health:
+      group:
+        readiness:
+          include: readinessState, db, kafka
+
+pg-migration:
+  batch-size: 1000

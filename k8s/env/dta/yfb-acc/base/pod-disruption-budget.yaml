@@ -1,0 +1,11 @@
+apiVersion: policy/v1beta1
+kind: PodDisruptionBudget
+metadata:
+  name: yts-users-pod-disruption-budget
+  labels:
+    name: yts-users
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      name: yts-users

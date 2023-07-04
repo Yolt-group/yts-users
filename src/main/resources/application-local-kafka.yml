@@ -1,0 +1,4 @@
+yolt:
+  kafka:
+    broker:
+      addresses: localhost:9042

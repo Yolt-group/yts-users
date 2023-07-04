@@ -1,0 +1,5 @@
+package nl.ing.lovebird.user.kafka.dto;
+
+public enum UserUpdateType {
+    OTHER
+}

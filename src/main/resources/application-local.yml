@@ -1,0 +1,30 @@
+server:
+  port: 8092
+yolt:
+  kafka:
+    topics:
+      all-users-batch:
+        topic-name: allUsersBatch
+      users:
+        topic-name: users
+      offload-users:
+        topic-name: ycs_offload_users
+    broker:
+      addresses: 10.0.0.4:9092
+  vault:
+    address: https://vault.vault-dta.yolt.io
+    auth:
+      service-account-token-file: src/test/resources/test-vault-token.txt
+    secret:
+      enabled: true
+      location: .
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  server:
+    port: 8109
+    ssl:
+      key-store: keystore.p12
